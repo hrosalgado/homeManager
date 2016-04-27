@@ -1,0 +1,28 @@
+----Funcionalidades
+-Gastos
+	-Alta ticket
+	-Baja ticket
+	-Consultar ticket
+	-Modificar ticket
+	-Lista de gastos (filtrar por períodos)
+
+-Lista de la compra
+	-Alta
+	-Baja
+	-Modificación
+	-Consulta
+
+-Tareas a realizar
+	-Alta
+	-Baja
+	-Modificación
+
+-Horario
+
+-Registro de usuarios	OK
+
+
+
+----Errores
+-Código genérico en app.yaml para el acceso de los usuarios
+-Si un usuario ha accedido a la aplicación y se cierra si darla a salir, error 'access_link'
