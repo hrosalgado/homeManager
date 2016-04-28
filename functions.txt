@@ -1,10 +1,10 @@
 ----Funcionalidades
 -Gastos
-	-Alta ticket
-	-Baja ticket
-	-Consultar ticket
-	-Modificar ticket
-	-Lista de gastos (filtrar por períodos)
+	-Alta ticket	OK
+	-Baja ticket	OK
+	-Consultar ticket	OK
+	-Modificar ticket	OK
+	-Lista de gastos 	OK
 
 -Lista de la compra
 	-Alta
@@ -20,6 +20,10 @@
 -Horario
 
 -Registro de usuarios	OK
+
+-Perfil de usuario con imágen
+
+-Gestión de errores
 
 
 

@@ -16,20 +16,27 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 	autoescape = True
 )
 
-class AddReceiptHandler(webapp2.RequestHandler):
+class UpdateReceiptHandler(webapp2.RequestHandler):
 	def get(self):
 		user = users.get_current_user()
 
 		if user != None:
 			user_name = user.nickname()
 			access_link = users.create_logout_url('/')
+			
+			# Get receipt id
+			idReceipt = self.request.get('idReceipt')
+
+			# Get query from database
+			receipt = ndb.Key(urlsafe = idReceipt).get()
 
 			template_values = {
 				'user_name' : user_name,
-				'access_link' : access_link
+				'access_link' : access_link,
+				'receipt' : receipt
 			}
 
-			template = JINJA_ENVIRONMENT.get_template('addReceipt.html')
+			template = JINJA_ENVIRONMENT.get_template('updateReceipt.html')
 			self.response.write(template.render(template_values));
 		else:
 			self.redirect('/')
@@ -40,34 +47,30 @@ class AddReceiptHandler(webapp2.RequestHandler):
 		if user != None:
 			user_name = user.nickname()
 			access_link = users.create_logout_url('/')
+			
+			# Get receipt id
+			idReceipt = self.request.get('idReceipt')
 
-			# Get values from inputs and save into database
-			concept = self.request.get('conceptReceiptAdd')
-			price = float(self.request.get('priceReceiptAdd'))
-			date = datetime.strptime(self.request.get('dateReceiptAdd'), '%Y-%m-%d')
+			# Get query from database
+			receipt = ndb.Key(urlsafe = idReceipt).get()
 
-			# Store data into database
-			receipt = Receipt()
+			# Update receipt
+			receipt.concept = self.request.get('conceptReceiptAdd')
+			receipt.price = float(self.request.get('priceReceiptAdd'))
+			receipt.date = datetime.strptime(self.request.get('dateReceiptAdd'), '%Y-%m-%d')
 
-			receipt.user = user.user_id()
-			receipt.concept = concept
-			receipt.price = price
-			receipt.date = date
-
+			# Save receipt
 			receipt.put()
 
 			time.sleep(1)
 
-			# Get query from database
-			receipts = Receipt.query()
-
 			template_values = {
 				'user_name' : user_name,
 				'access_link' : access_link,
-				'receipts' : receipts
+				'receipt' : receipt
 			}
 
-			template = JINJA_ENVIRONMENT.get_template('showReceipt.html')
+			template = JINJA_ENVIRONMENT.get_template('readReceipt.html')
 			self.response.write(template.render(template_values));
 		else:
 			self.redirect('/')

@@ -6,6 +6,10 @@ from google.appengine.api import users
 
 from home import HomeHandler
 from addReceipt import AddReceiptHandler
+from showReceipt import ShowReceiptHandler
+from readReceipt import ReadReceiptHandler
+from updateReceipt import UpdateReceiptHandler
+from deleteReceipt import DeleteReceiptHandler
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader = jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -32,5 +36,9 @@ class MainHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/home', HomeHandler),
-    ('/addReceipt', AddReceiptHandler)
+    ('/addReceipt', AddReceiptHandler),
+    ('/showReceipt', ShowReceiptHandler),
+    ('/readReceipt', ReadReceiptHandler),
+    ('/updateReceipt', UpdateReceiptHandler),
+    ('/deleteReceipt', DeleteReceiptHandler)
 ], debug=True)
