@@ -7,7 +7,7 @@ from google.appengine.ext import ndb
 
 import time
 
-from receipt import Receipt
+from shoppingList import ShoppingList
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader = jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -15,7 +15,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 	autoescape = True
 )
 
-class DeleteReceiptHandler(webapp2.RequestHandler):
+class DeleteListHandler(webapp2.RequestHandler):
 	def get(self):
 		user = users.get_current_user()
 
@@ -25,33 +25,33 @@ class DeleteReceiptHandler(webapp2.RequestHandler):
 			
 			# Get receipt id
 			try:
-				idReceipt = self.request.get('idReceipt')
+				idShoppingList = self.request.get('idShoppingList')
 			except:
-				self.redirect('/error?error=El ticket no existe :(')
+				self.redirect('/error?error=La lista de la compra no existe :(')
 				return
 
 			# Get query from database
 			try:
-				receipt = ndb.Key(urlsafe = idReceipt).get()
+				shoppingList = ndb.Key(urlsafe = idShoppingList).get()
 			except:
-				self.redirect('/error?error=El ticket no existe :(')
+				self.redirect('/error?error=La lista de la compra no existe :(')
 				return
 			
 			# Delete id
-			receipt.key.delete()
+			shoppingList.key.delete()
 
 			time.sleep(1)
 
 			# Get query from database
-			receipts = Receipt.query(Receipt.user == user.user_id()).order(-Receipt.date)
+			shoppingLists = ShoppingList.query(ShoppingList.user == user.user_id()).order(-ShoppingList.date)
 
 			template_values = {
 				'user_name' : user_name,
 				'access_link' : access_link,
-				'receipts' : receipts
+				'shoppingLists' : shoppingLists
 			}
 
-			template = JINJA_ENVIRONMENT.get_template('showReceipt.html')
+			template = JINJA_ENVIRONMENT.get_template('showList.html')
 			self.response.write(template.render(template_values));
 		else:
 			self.redirect('/')

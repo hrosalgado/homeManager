@@ -116,51 +116,60 @@
 
                 <!-- Keep all page content within the page-content inset div! -->
                 <div class="page-content inset" style="margin-top: 30px; margin-left: 40px; margin-right: 40px; margin-bottom: 10px;">
-                    <h2>Ticket</h2>
+                    <h2>Nueva lista</h2>
                     <hr style="border-color: #424242;">
 
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="form-group">
-                                <label>Concepto</label>
-                                <textarea type="text" class="form-control" name="conceptReceiptAdd" id="conceptReceiptAdd" rows="4" style="resize: none;" readonly>{{receipt.concept}}</textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                            <div class="form-group">
-                                <label>Precio</label>
-                                <input type="text" class="form-control" name="priceReceiptAdd" id="priceReceiptAdd" value="{{receipt.price}}" readonly />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                            <div class="form-group">
-                                <label>Fecha</label>
-                                <input type="date" class="form-control" name="dateReceiptAdd" id="dateReceiptAdd" value="{{receipt.date}}" readonly />
-                            </div>
-                        </div>
-                    </div>
-
-                    <br>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                            <div class="btn-group btn-block">
-                                <button type="submit" class="btn btn-default btn-warning btn-block" name="btnReceiptUpdate" onclick="window.location.href='/updateReceipt?idReceipt={{receipt.key.urlsafe()}}'">Modificar</button>
+                    <form method="post" action="/addList" onsubmit="return check()">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" name="nameAddList" id="nameAddList" />
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                            <div class="btn-group btn-block">
-                                <button type="submit" class="btn btn-default btn-danger btn-block" name="btnReceiptDelete" onclick="window.location.href='/deleteReceipt?idReceipt={{receipt.key.urlsafe()}}'">Eliminar</button>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-8 col-md-7 col-lg-6">
+                                <h4>Ítems</h4>
+                                <hr style="border-color: #424242; margin-top: 0px;">
+
+                                <input type="text" class="form-control" name="item1" id="item1" style="margin-top: 10px;" />
+                                <input type="text" class="form-control hide" name="item2" id="item2" style="margin-top: 10px;" />
+                                <input type="text" class="form-control hide" name="item3" id="item3" style="margin-top: 10px;" />
+                                <input type="text" class="form-control hide" name="item4" id="item4" style="margin-top: 10px;" />
+                                <input type="text" class="form-control hide" name="item5" id="item5" style="margin-top: 10px;" />
+                                <input type="text" class="form-control hide" name="item6" id="item6" style="margin-top: 10px;" />
+                                <input type="text" class="form-control hide" name="item7" id="item7" style="margin-top: 10px;" />
+                                <input type="text" class="form-control hide" name="item8" id="item8" style="margin-top: 10px;" />
+                                <input type="text" class="form-control hide" name="item9" id="item9" style="margin-top: 10px;" />
+                                <input type="text" class="form-control hide" name="item10" id="item10" style="margin-top: 10px;" />
+                            </div>
+                        </div><br>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-5 col-md-4 col-lg-2">
+                                <div class="btn-group btn-block">
+                                    <button type="button" class="btn btn-default btn-info btn-block" name="btnAddItem" id="btnAddItem" onclick="addItem()">Añadir ítem</button>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-5 col-md-4 col-lg-2">
+                                <div class="btn-group btn-block">
+                                    <button type="button" class="btn btn-default btn-danger btn-block" name="btnDeleteItem" id="btnDeleteItem" onclick="deleteItem()">Quitar ítem</button>
+                                </div>
+                            </div>
+                        </div><br>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-5 col-md-4 col-lg-2">
+                                <div class="btn-group btn-block">
+                                    <input type="hidden" name="items" id="items" value="">
+                                    <button type="submit" class="btn btn-default btn-success btn-block">Crear lista</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -171,10 +180,72 @@
 
         <!-- Custom JavaScript for the Menu Toggle -->
         <script>
-            $("#menu-toggle").click(function(e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("active");
-            });
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("active");
+        });
+        </script>
+
+        <script type="text/javascript">
+            items = 2;
+
+            function addItem(){
+                if(items <= 10){
+                    document.getElementById('item' + items).className = 'form-control show';
+                    items++;
+                }
+            }
+
+            function deleteItem(){
+                if(items > 2){
+                    document.getElementById('item' + (items - 1)).className = 'form-control hide';
+                    items--;
+                }
+            }
+
+            function check(){
+                document.getElementById('items').value = items;
+
+                var check = 0;
+
+                name = document.getElementById('nameAddList').value;
+
+                if(name == ''){
+                    document.getElementById('nameAddList').style.borderColor = '#a94442';
+                    document.getElementById('nameAddList').style.borderWidth = '2px';
+                }else{
+                    document.getElementById('nameAddList').style.borderColor = '#3c763d';
+                    document.getElementById('nameAddList').style.borderWidth = '2px';
+                }
+
+                for(i = 0; i < items - 1; i++){
+                    item = document.getElementById('item' + (i + 1)).value;
+
+                    if(item == ''){
+                        document.getElementById('item' + (i + 1)).style.borderColor = '#a94442';
+                        document.getElementById('item' + (i + 1)).style.borderWidth = '2px';
+
+                        check++;
+                    }else{
+                        document.getElementById('item' + (i + 1)).style.borderColor = '#3c763d';
+                        document.getElementById('item' + (i + 1)).style.borderWidth = '2px';
+                    }
+                }
+
+                if(check != 0){
+                    return false;
+                }else{
+                    document.getElementById('nameAddList').style.borderColor = '#3c763d';
+                    document.getElementById('nameAddList').style.borderWidth = '2px';
+
+                    for(i = 0; i < items - 1; i++){
+                        document.getElementById('item' + (i + 1)).style.borderColor = '#3c763d';
+                        document.getElementById('item' + (i + 1)).style.borderWidth = '2px';
+                    }
+
+                    return true;
+                }
+            }
         </script>
     </body>
 </html>

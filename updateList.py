@@ -8,7 +8,7 @@ from google.appengine.ext import ndb
 from datetime import datetime
 import time
 
-from receipt import Receipt
+from shoppingList import ShoppingList
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader = jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -16,7 +16,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 	autoescape = True
 )
 
-class UpdateReceiptHandler(webapp2.RequestHandler):
+class UpdateListHandler(webapp2.RequestHandler):
 	def get(self):
 		user = users.get_current_user()
 
@@ -24,27 +24,27 @@ class UpdateReceiptHandler(webapp2.RequestHandler):
 			user_name = user.nickname()
 			access_link = users.create_logout_url('/')
 			
-			# Get receipt id
+			# Get shopping list id
 			try:
-				idReceipt = self.request.get('idReceipt')
+				idShoppingList = self.request.get('idShoppingList')
 			except:
-				self.redirect('/error?error=El ticket no existe :(')
+				self.redirect('/error?error=La lista de la compra no existe :(')
 				return
 
 			# Get query from database
 			try:
-				receipt = ndb.Key(urlsafe = idReceipt).get()
+				shoppingList = ndb.Key(urlsafe = idShoppingList).get()
 			except:
-				self.redirect('/error?error=El ticket no existe :(')
+				self.redirect('/error?error=La lista de la compra no existe :(')
 				return
 			
 			template_values = {
 				'user_name' : user_name,
 				'access_link' : access_link,
-				'receipt' : receipt
+				'shoppingList' : shoppingList
 			}
 
-			template = JINJA_ENVIRONMENT.get_template('updateReceipt.html')
+			template = JINJA_ENVIRONMENT.get_template('updateList.html')
 			self.response.write(template.render(template_values));
 		else:
 			self.redirect('/')
@@ -56,29 +56,34 @@ class UpdateReceiptHandler(webapp2.RequestHandler):
 			user_name = user.nickname()
 			access_link = users.create_logout_url('/')
 			
-			# Get receipt id
-			idReceipt = self.request.get('idReceipt')
+			# Get ShoppingList id
+			idShoppingList = self.request.get('idShoppingList')
 
 			# Get query from database
-			receipt = ndb.Key(urlsafe = idReceipt).get()
+			shoppingList = ndb.Key(urlsafe = idShoppingList).get()
 
-			# Update receipt
-			receipt.concept = self.request.get('conceptReceiptAdd')
-			receipt.price = float(self.request.get('priceReceiptAdd'))
-			receipt.date = datetime.strptime(self.request.get('dateReceiptAdd'), '%Y-%m-%d')
+			# Update ShoppingList
+			shoppingList.name = self.request.get('nameAddList')
+			
+			items = list()
+			numItems = self.request.get('numItems')
+			for i in range(1, int(numItems) + 1):
+				items.append(self.request.get('item' + str(i)))
 
-			# Save receipt
-			receipt.put()
+			shoppingList.items = items
+
+			# Save shoppingList
+			shoppingList.put()
 
 			time.sleep(1)
 
 			template_values = {
 				'user_name' : user_name,
 				'access_link' : access_link,
-				'receipt' : receipt
+				'shoppingList' : shoppingList
 			}
 
-			template = JINJA_ENVIRONMENT.get_template('readReceipt.html')
+			template = JINJA_ENVIRONMENT.get_template('readList.html')
 			self.response.write(template.render(template_values));
 		else:
 			self.redirect('/')

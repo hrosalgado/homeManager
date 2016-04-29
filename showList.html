@@ -116,51 +116,45 @@
 
                 <!-- Keep all page content within the page-content inset div! -->
                 <div class="page-content inset" style="margin-top: 30px; margin-left: 40px; margin-right: 40px; margin-bottom: 10px;">
-                    <h2>Ticket</h2>
+                    <h2>Listas de la compra</h2>
                     <hr style="border-color: #424242;">
 
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="form-group">
-                                <label>Concepto</label>
-                                <textarea type="text" class="form-control" name="conceptReceiptAdd" id="conceptReceiptAdd" rows="4" style="resize: none;" readonly>{{receipt.concept}}</textarea>
-                            </div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                            <label>Nombre</label>
+                            <hr style="border-color: #A4A4A4; margin-top: -1px;">
+                        </div>
+
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <label>Fecha</label>
+                            <hr style="border-color: #A4A4A4; margin-top: -1px;">
+                        </div>
+
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <label>Items</label>
+                            <hr style="border-color: #A4A4A4; margin-top: -1px;">
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                            <div class="form-group">
-                                <label>Precio</label>
-                                <input type="text" class="form-control" name="priceReceiptAdd" id="priceReceiptAdd" value="{{receipt.price}}" readonly />
-                            </div>
-                        </div>
-                    </div>
+                    {% if(shoppingLists.count() > 0) %}
+                        {% for shoppingList in shoppingLists %}
+                            <a href="/readList?idShoppingList={{shoppingList.key.urlsafe()}}">
+                                <div class="row">
+                                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                        {{shoppingList.name}}
+                                    </div>
 
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                            <div class="form-group">
-                                <label>Fecha</label>
-                                <input type="date" class="form-control" name="dateReceiptAdd" id="dateReceiptAdd" value="{{receipt.date}}" readonly />
-                            </div>
-                        </div>
-                    </div>
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        {{shoppingList.date}}
+                                    </div>
 
-                    <br>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                            <div class="btn-group btn-block">
-                                <button type="submit" class="btn btn-default btn-warning btn-block" name="btnReceiptUpdate" onclick="window.location.href='/updateReceipt?idReceipt={{receipt.key.urlsafe()}}'">Modificar</button>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                            <div class="btn-group btn-block">
-                                <button type="submit" class="btn btn-default btn-danger btn-block" name="btnReceiptDelete" onclick="window.location.href='/deleteReceipt?idReceipt={{receipt.key.urlsafe()}}'">Eliminar</button>
-                            </div>
-                        </div>
-                    </div>
+                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                        {{shoppingList.items|length}}
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -171,10 +165,10 @@
 
         <!-- Custom JavaScript for the Menu Toggle -->
         <script>
-            $("#menu-toggle").click(function(e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("active");
-            });
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("active");
+        });
         </script>
     </body>
 </html>

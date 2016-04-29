@@ -10,6 +10,12 @@ from showReceipt import ShowReceiptHandler
 from readReceipt import ReadReceiptHandler
 from updateReceipt import UpdateReceiptHandler
 from deleteReceipt import DeleteReceiptHandler
+from error import ErrorHandler
+from addList import AddListHandler
+from showList import ShowListHandler
+from readList import ReadListHandler
+from updateList import UpdateListHandler
+from deleteList import DeleteListHandler
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader = jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -40,5 +46,11 @@ app = webapp2.WSGIApplication([
     ('/showReceipt', ShowReceiptHandler),
     ('/readReceipt', ReadReceiptHandler),
     ('/updateReceipt', UpdateReceiptHandler),
-    ('/deleteReceipt', DeleteReceiptHandler)
+    ('/deleteReceipt', DeleteReceiptHandler),
+    ('/error', ErrorHandler),
+    ('/addList', AddListHandler),
+    ('/showList', ShowListHandler),
+    ('/readList', ReadListHandler),
+    ('/updateList', UpdateListHandler),
+    ('/deleteList', DeleteListHandler)
 ], debug=True)

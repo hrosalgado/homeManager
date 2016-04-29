@@ -7,10 +7,11 @@
 	-Lista de gastos 	OK
 
 -Lista de la compra
-	-Alta
-	-Baja
-	-Modificación
-	-Consulta
+	-Alta	OK
+	-Baja	OK
+	-Modificación	OK
+	-Consulta 	OK
+	-Listas de la compra	OK
 
 -Tareas a realizar
 	-Alta
@@ -19,14 +20,17 @@
 
 -Horario
 
+-Home
+
 -Registro de usuarios	OK
 
--Perfil de usuario con imágen
+-Perfil de usuario con imagen
 
 -Gestión de errores
 
 
 
-----Errores
+----Errores / Preguntas
 -Código genérico en app.yaml para el acceso de los usuarios
 -Si un usuario ha accedido a la aplicación y se cierra si darla a salir, error 'access_link'
+-Problema con las excepciones en el manejo de errores

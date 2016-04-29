@@ -15,3 +15,9 @@ indexes:
   - name: user
   - name: date
     direction: desc
+
+- kind: ShoppingList
+  properties:
+  - name: user
+  - name: date
+    direction: desc

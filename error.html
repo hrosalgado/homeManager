@@ -116,51 +116,7 @@
 
                 <!-- Keep all page content within the page-content inset div! -->
                 <div class="page-content inset" style="margin-top: 30px; margin-left: 40px; margin-right: 40px; margin-bottom: 10px;">
-                    <h2>Ticket</h2>
-                    <hr style="border-color: #424242;">
-
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="form-group">
-                                <label>Concepto</label>
-                                <textarea type="text" class="form-control" name="conceptReceiptAdd" id="conceptReceiptAdd" rows="4" style="resize: none;" readonly>{{receipt.concept}}</textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                            <div class="form-group">
-                                <label>Precio</label>
-                                <input type="text" class="form-control" name="priceReceiptAdd" id="priceReceiptAdd" value="{{receipt.price}}" readonly />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                            <div class="form-group">
-                                <label>Fecha</label>
-                                <input type="date" class="form-control" name="dateReceiptAdd" id="dateReceiptAdd" value="{{receipt.date}}" readonly />
-                            </div>
-                        </div>
-                    </div>
-
-                    <br>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                            <div class="btn-group btn-block">
-                                <button type="submit" class="btn btn-default btn-warning btn-block" name="btnReceiptUpdate" onclick="window.location.href='/updateReceipt?idReceipt={{receipt.key.urlsafe()}}'">Modificar</button>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                            <div class="btn-group btn-block">
-                                <button type="submit" class="btn btn-default btn-danger btn-block" name="btnReceiptDelete" onclick="window.location.href='/deleteReceipt?idReceipt={{receipt.key.urlsafe()}}'">Eliminar</button>
-                            </div>
-                        </div>
-                    </div>
+                    <h2>{{error}}</h2>
                 </div>
             </div>
         </div>
@@ -171,10 +127,10 @@
 
         <!-- Custom JavaScript for the Menu Toggle -->
         <script>
-            $("#menu-toggle").click(function(e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("active");
-            });
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("active");
+        });
         </script>
     </body>
 </html>
