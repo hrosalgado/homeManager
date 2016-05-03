@@ -62,7 +62,7 @@ class AddListHandler(webapp2.RequestHandler):
 			time.sleep(1)
 
 			# Get query from database
-			shoppingLists = ShoppingList.query()
+			shoppingLists = ShoppingList.query(ShoppingList.user == user.user_id())
 
 			template_values = {
 				'user_name' : user_name,

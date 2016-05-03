@@ -25,27 +25,27 @@ class UpdateListHandler(webapp2.RequestHandler):
 			access_link = users.create_logout_url('/')
 			
 			# Get shopping list id
-			try:
-				idShoppingList = self.request.get('idShoppingList')
-			except:
+			idShoppingList = self.request.get('idShoppingList', '')
+
+			if idShoppingList == '':
 				self.redirect('/error?error=La lista de la compra no existe :(')
 				return
-
-			# Get query from database
-			try:
+			else:
+				# Get query from database
 				shoppingList = ndb.Key(urlsafe = idShoppingList).get()
-			except:
-				self.redirect('/error?error=La lista de la compra no existe :(')
-				return
-			
-			template_values = {
-				'user_name' : user_name,
-				'access_link' : access_link,
-				'shoppingList' : shoppingList
-			}
 
-			template = JINJA_ENVIRONMENT.get_template('updateList.html')
-			self.response.write(template.render(template_values));
+				if shoppingList == None:
+					self.redirect('/error?error=La lista de la compra no existe :(')
+					return
+				else:
+					template_values = {
+						'user_name' : user_name,
+						'access_link' : access_link,
+						'shoppingList' : shoppingList
+					}
+
+					template = JINJA_ENVIRONMENT.get_template('updateList.html')
+					self.response.write(template.render(template_values));
 		else:
 			self.redirect('/')
 

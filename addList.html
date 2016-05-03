@@ -40,6 +40,14 @@
 
                     <div class="row" style="margin-left: 7px; margin-right: 10px">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <input type="button" class="btn btn-primary btn-block" value="Principal" onclick="window.location.href='/home'" />
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row" style="margin-left: 7px; margin-right: 10px">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h3 class="text-center" style="margin-top: 0px; color: #F0F0F0">Gestión de gastos</h3>
                             <hr>
                             <input type="button" class="btn btn-primary btn-block" value="Nuevo ticket" onclick="window.location.href='/addReceipt'" />
@@ -66,7 +74,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h3 class="text-center" style="margin-top: 0px; color: #F0F0F0">Tareas a realizar</h3>
                             <hr>
-                            <input type="button" class="btn btn-primary btn-block" value="Nueva tarea" onclick="window.location.href='/newTask'" />
+                            <input type="button" class="btn btn-primary btn-block" value="Nueva tarea" onclick="window.location.href='/addTask'" />
                             <div style="margin-bottom: 10px"></div>
                             <input type="button" class="btn btn-primary btn-block" value="Consultar tareas" onclick="window.location.href='/showTask'" />
                         </div>
@@ -213,6 +221,8 @@
                 if(name == ''){
                     document.getElementById('nameAddList').style.borderColor = '#a94442';
                     document.getElementById('nameAddList').style.borderWidth = '2px';
+
+                    check++;
                 }else{
                     document.getElementById('nameAddList').style.borderColor = '#3c763d';
                     document.getElementById('nameAddList').style.borderWidth = '2px';

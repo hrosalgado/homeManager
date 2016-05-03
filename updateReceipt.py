@@ -25,27 +25,27 @@ class UpdateReceiptHandler(webapp2.RequestHandler):
 			access_link = users.create_logout_url('/')
 			
 			# Get receipt id
-			try:
-				idReceipt = self.request.get('idReceipt')
-			except:
+			idReceipt = self.request.get('idReceipt', '')
+
+			if idReceipt == '':
 				self.redirect('/error?error=El ticket no existe :(')
 				return
-
-			# Get query from database
-			try:
+			else:
+				# Get query from database
 				receipt = ndb.Key(urlsafe = idReceipt).get()
-			except:
-				self.redirect('/error?error=El ticket no existe :(')
-				return
-			
-			template_values = {
-				'user_name' : user_name,
-				'access_link' : access_link,
-				'receipt' : receipt
-			}
 
-			template = JINJA_ENVIRONMENT.get_template('updateReceipt.html')
-			self.response.write(template.render(template_values));
+				if receipt == None:
+					self.redirect('/error?error=El ticket no existe :(')
+					return
+				else:
+					template_values = {
+						'user_name' : user_name,
+						'access_link' : access_link,
+						'receipt' : receipt
+					}
+
+					template = JINJA_ENVIRONMENT.get_template('updateReceipt.html')
+					self.response.write(template.render(template_values));
 		else:
 			self.redirect('/')
 

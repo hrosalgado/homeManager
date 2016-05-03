@@ -14,23 +14,19 @@
 	-Listas de la compra	OK
 
 -Tareas a realizar
-	-Alta
-	-Baja
-	-Modificación
+	-Alta	OK
+	-Baja 	OK
+	-Modificación	OK
+	-Consulta 	OK
+	-Listado de tareas 	OK
 
 -Horario
+	-Añadir tarea 	OK
+	-Consultar tarea 	OK
+	-Modificar tarea 	OK
+	-Eliminar tarea 	OK
+	-Consultar horario 	OK
 
--Home
+-Home 	OK
 
 -Registro de usuarios	OK
-
--Perfil de usuario con imagen
-
--Gestión de errores
-
-
-
-----Errores / Preguntas
--Código genérico en app.yaml para el acceso de los usuarios
--Si un usuario ha accedido a la aplicación y se cierra si darla a salir, error 'access_link'
--Problema con las excepciones en el manejo de errores

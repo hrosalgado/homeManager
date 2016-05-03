@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Gestor del hogar</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="Resources/css/bootstrap.css" rel="stylesheet">
+
+        <!-- Add custom CSS here -->
+        <link href="Resources/css/simple-sidebar.css" rel="stylesheet">
+    </head>
+    
+    <body style="overflow-x: hidden;">
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper" style="background: #424242; overflow-x: hidden">
+                <ul class="sidebar-nav" style="overflow: hidden;">
+                    <div class="row" style="margin-right: 0px; margin-top: 5px;">
+                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+
+                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                            <h1 class="text-center" style="color: #F0F0F0">Menú</h1>
+                        </div>
+
+                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                    </div>
+
+                    <hr style="margin-bottom: 10px; margin-top: 17px">
+
+                    <div class="row" style="margin-left: 7px; margin-right: 10px">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h3 class="text-center" style="color: #F0F0F0">{{user_name}}</h3>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row" style="margin-left: 7px; margin-right: 10px">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <input type="button" class="btn btn-primary btn-block" value="Principal" onclick="window.location.href='/home'" />
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row" style="margin-left: 7px; margin-right: 10px">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h3 class="text-center" style="margin-top: 0px; color: #F0F0F0">Gestión de gastos</h3>
+                            <hr>
+                            <input type="button" class="btn btn-primary btn-block" value="Nuevo ticket" onclick="window.location.href='/addReceipt'" />
+                            <div style="margin-bottom: 10px"></div>
+                            <input type="button" class="btn btn-primary btn-block" value="Consultar gastos" onclick="window.location.href='/showReceipt'" />
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row" style="margin-left: 7px; margin-right: 10px">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h3 class="text-center" style="margin-top: 0px; color: #F0F0F0">Lista de la compra</h3>
+                            <hr>
+                            <input type="button" class="btn btn-primary btn-block" value="Nueva lista" onclick="window.location.href='/addList'" />
+                            <div style="margin-bottom: 10px"></div>
+                            <input type="button" class="btn btn-primary btn-block" value="Consultar listas" onclick="window.location.href='/showList'" />
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row" style="margin-left: 7px; margin-right: 10px">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h3 class="text-center" style="margin-top: 0px; color: #F0F0F0">Tareas a realizar</h3>
+                            <hr>
+                            <input type="button" class="btn btn-primary btn-block" value="Nueva tarea" onclick="window.location.href='/addTask'" />
+                            <div style="margin-bottom: 10px"></div>
+                            <input type="button" class="btn btn-primary btn-block" value="Consultar tareas" onclick="window.location.href='/showTask'" />
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row" style="margin-left: 7px; margin-right: 10px">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h3 class="text-center" style="margin-top: 0px; color: #F0F0F0">Horario</h3>
+                            <hr>
+                            <input type="button" class="btn btn-primary btn-block" value="Consultar" onclick="window.location.href='/showSchedule'" />
+                        </div>
+                    </div>
+
+                    <hr style="margin-bottom: 17px; margin-top: 17px">
+
+                    <div class="row" style="margin-left: 7px; margin-right: 10px; margin-bottom: 10px;">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="btn-group btn-block">
+                            <button type="submit" class="btn btn-danger btn-block" onclick="window.location.href='{{access_link}}'">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+
+            <!-- Page content -->
+            <div id="page-content-wrapper" style="overflow: hidden; border-left: solid white 1px;">
+                <div class="content-header" style="background: #424242; height: 73px;">
+                    <div class="row" style="margin-left: 0px; background-color: #424242; padding-top: 13px; padding-bottom: 6px;">
+                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                            <a id="menu-toggle" href="#" class="btn btn-default">
+                                <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                            </a>
+                        </div>
+
+                        <div class="col-md-2 col-lg-2"></div>
+
+                        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-5 text-center">
+                            <h1 style="color: #F0F0F0;">Gestor del hogar</h1>
+                        </div>
+
+                        <div class="col-md-3 col-lg-3"></div>
+                    </div>
+                </div>
+
+                <!-- Keep all page content within the page-content inset div! -->
+                <div class="page-content inset" style="margin-top: 30px; margin-left: 40px; margin-right: 40px; margin-bottom: 10px;">
+                    <h2>Añadir ocupación</h2>
+                    <hr style="border-color: #424242;">
+
+                    <form method="post" action="" onsubmit="return check()">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label>Día de la semana</label>
+                                    <select class="form-control" name="day" id="day">
+                                        <option selected value="lunes">Lunes</option>
+                                        <option value="martes">Martes</option>
+                                        <option value="miercoles">Miércoles</option>
+                                        <option value="jueves">Jueves</option>
+                                        <option value="viernes">Viernes</option>
+                                        <option value="sabado">Sábado</option>
+                                        <option value="domingo">Domingo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label>Hora inicio</label>
+                                    <input type="text" class="form-control" name="hourStart" id="hourStart" placeholder="Hora">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <input type="text" class="form-control" name="minStart" id="minStart" placeholder="Minuto">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label>Hora fin</label>
+                                    <input type="text" class="form-control" name="hourEnd" id="hourEnd" placeholder="Hora">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <input type="text" class="form-control" name="minEnd" id="minEnd" placeholder="Minuto">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label>Ocupación</label>
+                                    <textarea type="text" class="form-control" name="task" id="task" rows="2" style="resize: none;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                <div class="btn-group btn-block">
+                                    <button type="submit" class="btn btn-default btn-success btn-block">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- JavaScript -->
+        <script src="../Resources/js/jquery-1.10.2.js"></script>
+        <script src="../Resources/js/bootstrap.js"></script>
+
+        <!-- Custom JavaScript for the Menu Toggle -->
+        <script>
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("active");
+            });
+        </script>
+
+        <script type="text/javascript">
+            function check(){
+                var check = 0;
+
+                day = document.getElementById('day').value;
+                hourStart = document.getElementById('hourStart').value;
+                minStart = document.getElementById('minStart').value;
+                hourEnd = document.getElementById('hourEnd').value;
+                minEnd = document.getElementById('minEnd').value;
+                task = document.getElementById('task').value;
+
+                if(day == ''){
+                    document.getElementById('day').style.borderColor = '#a94442';
+                    document.getElementById('day').style.borderWidth = '2px';
+
+                    check++;
+                }else{
+                    document.getElementById('day').style.borderColor = '#3c763d';
+                    document.getElementById('day').style.borderWidth = '2px';
+                }
+
+                if(hourStart == ''){
+                    document.getElementById('hourStart').style.borderColor = '#a94442';
+                    document.getElementById('hourStart').style.borderWidth = '2px';
+
+                    check++;
+                }else if(!(/^[0-9]+$/.test(hourStart))){
+                    document.getElementById('hourStart').style.borderColor = '#a94442';
+                    document.getElementById('hourStart').style.borderWidth = '2px';
+
+                    check++;
+                }else if(hourStart > 23){
+                    document.getElementById('hourStart').style.borderColor = '#a94442';
+                    document.getElementById('hourStart').style.borderWidth = '2px';
+
+                    check++;
+                }else{
+                    document.getElementById('hourStart').style.borderColor = '#3c763d';
+                    document.getElementById('hourStart').style.borderWidth = '2px';
+                }
+
+                if(minStart == ''){
+                    document.getElementById('minStart').style.borderColor = '#a94442';
+                    document.getElementById('minStart').style.borderWidth = '2px';
+
+                    check++;
+                }else if(!(/^[0-9]+$/.test(minStart))){
+                    document.getElementById('minStart').style.borderColor = '#a94442';
+                    document.getElementById('minStart').style.borderWidth = '2px';
+
+                    check++;
+                }else if(minStart > 59){
+                    document.getElementById('minStart').style.borderColor = '#a94442';
+                    document.getElementById('minStart').style.borderWidth = '2px';
+
+                    check++;
+                }else{
+                    document.getElementById('minStart').style.borderColor = '#3c763d';
+                    document.getElementById('minStart').style.borderWidth = '2px';
+                }
+
+                if(hourEnd == ''){
+                    document.getElementById('hourEnd').style.borderColor = '#a94442';
+                    document.getElementById('hourEnd').style.borderWidth = '2px';
+
+                    check++;
+                }else if(!(/^[0-9]+$/.test(hourEnd))){
+                    document.getElementById('hourEnd').style.borderColor = '#a94442';
+                    document.getElementById('hourEnd').style.borderWidth = '2px';
+
+                    check++;
+                }else if(hourEnd > 23){
+                    document.getElementById('hourEnd').style.borderColor = '#a94442';
+                    document.getElementById('hourEnd').style.borderWidth = '2px';
+
+                    check++;
+                }else{
+                    document.getElementById('hourEnd').style.borderColor = '#3c763d';
+                    document.getElementById('hourEnd').style.borderWidth = '2px';
+                }
+
+                if(minEnd == ''){
+                    document.getElementById('minEnd').style.borderColor = '#a94442';
+                    document.getElementById('minEnd').style.borderWidth = '2px';
+
+                    check++;
+                }else if(!(/^[0-9]+$/.test(minEnd))){
+                    document.getElementById('minEnd').style.borderColor = '#a94442';
+                    document.getElementById('minEnd').style.borderWidth = '2px';
+
+                    check++;
+                }else if(minEnd > 59){
+
+                }else{
+                    document.getElementById('minEnd').style.borderColor = '#3c763d';
+                    document.getElementById('minEnd').style.borderWidth = '2px';
+                }
+
+                if(task == ''){
+                    document.getElementById('task').style.borderColor = '#a94442';
+                    document.getElementById('task').style.borderWidth = '2px';
+
+                    check++;
+                }else{
+                    document.getElementById('task').style.borderColor = '#3c763d';
+                    document.getElementById('task').style.borderWidth = '2px';
+                }
+
+                if(check != 0){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        </script>
+    </body>
+</html>

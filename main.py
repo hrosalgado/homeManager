@@ -16,6 +16,16 @@ from showList import ShowListHandler
 from readList import ReadListHandler
 from updateList import UpdateListHandler
 from deleteList import DeleteListHandler
+from addTask import AddTaskHandler
+from showTask import ShowTaskHandler
+from readTask import ReadTaskHandler
+from updateTask import UpdateTaskHandler
+from deleteTask import DeleteTaskHandler
+from showSchedule import ShowScheduleHandler
+from addFieldSchedule import AddFieldScheduleHandler
+from readFieldSchedule import ReadFieldScheduleHandler
+from updateFieldSchedule import UpdateFieldScheduleHandler
+from deleteFieldSchedule import DeleteFieldScheduleHandler
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader = jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -25,6 +35,8 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        access_link = 0
+
     	user = users.get_current_user()
 
     	if(user != None):
@@ -52,5 +64,15 @@ app = webapp2.WSGIApplication([
     ('/showList', ShowListHandler),
     ('/readList', ReadListHandler),
     ('/updateList', UpdateListHandler),
-    ('/deleteList', DeleteListHandler)
+    ('/deleteList', DeleteListHandler),
+    ('/addTask', AddTaskHandler),
+    ('/showTask', ShowTaskHandler),
+    ('/readTask', ReadTaskHandler),
+    ('/updateTask', UpdateTaskHandler),
+    ('/deleteTask', DeleteTaskHandler),
+    ('/showSchedule', ShowScheduleHandler),
+    ('/addFieldSchedule', AddFieldScheduleHandler),
+    ('/readFieldSchedule', ReadFieldScheduleHandler),
+    ('/updateFieldSchedule', UpdateFieldScheduleHandler),
+    ('/deleteFieldSchedule', DeleteFieldScheduleHandler)
 ], debug=True)

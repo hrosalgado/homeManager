@@ -24,34 +24,34 @@ class DeleteReceiptHandler(webapp2.RequestHandler):
 			access_link = users.create_logout_url('/')
 			
 			# Get receipt id
-			try:
-				idReceipt = self.request.get('idReceipt')
-			except:
+			idReceipt = self.request.get('idReceipt', '')
+
+			if idReceipt == '':
 				self.redirect('/error?error=El ticket no existe :(')
 				return
-
-			# Get query from database
-			try:
+			else:
+				# Get query from database
 				receipt = ndb.Key(urlsafe = idReceipt).get()
-			except:
-				self.redirect('/error?error=El ticket no existe :(')
-				return
-			
-			# Delete id
-			receipt.key.delete()
+				
+				if receipt == None:
+					self.redirect('/error?error=El ticket no existe :(')
+					return
+				else:
+					# Delete id
+					receipt.key.delete()
 
-			time.sleep(1)
+					time.sleep(1)
 
-			# Get query from database
-			receipts = Receipt.query(Receipt.user == user.user_id()).order(-Receipt.date)
+					# Get query from database
+					receipts = Receipt.query(Receipt.user == user.user_id()).order(-Receipt.date)
 
-			template_values = {
-				'user_name' : user_name,
-				'access_link' : access_link,
-				'receipts' : receipts
-			}
+					template_values = {
+						'user_name' : user_name,
+						'access_link' : access_link,
+						'receipts' : receipts
+					}
 
-			template = JINJA_ENVIRONMENT.get_template('showReceipt.html')
-			self.response.write(template.render(template_values));
+					template = JINJA_ENVIRONMENT.get_template('showReceipt.html')
+					self.response.write(template.render(template_values));
 		else:
 			self.redirect('/')
